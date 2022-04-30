@@ -16,6 +16,10 @@ song_user = db.Table('song_user', db.Model.metadata,
     db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
     db.Column('song_id', db.Integer, db.ForeignKey('songs.id'))
 )
+transaction_user = db.Table('transaction_user', db.Model.metadata,
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('transaction_id', db.Integer, db.ForeignKey('transactions.id'))
+)
 
 
 
@@ -32,6 +36,18 @@ class Song(db.Model,SerializerMixin):
         self.title = title
         self.artist = artist
         self.genre = genre
+
+class Transaction(db.Model,SerializerMixin):
+    __tablename__ = 'transactions'
+    id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.String(300), nullable=True, unique=False)
+    type = db.Column(db.String(300), nullable=True, unique=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = relationship("User", back_populates="transactions", uselist=False)
+
+    def __init__(self, amount, type):
+        self.amount = amount
+        self.type = type
 
 
 class Location(db.Model, SerializerMixin):
@@ -73,6 +89,8 @@ class User(UserMixin, db.Model):
                     secondary=location_user, backref="users")
     songs = db.relationship("Song",
                     secondary=song_user, backref="users")
+    transactions = db.relationship("Transaction",
+                            secondary=transaction_user, backref="users")
 
     def __init__(self, email, password, is_admin):
         self.email = email
