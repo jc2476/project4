@@ -1,11 +1,9 @@
 import csv
 import logging
 import os
-
 from flask import Blueprint, render_template, abort, url_for,current_app
 from flask_login import current_user, login_required
 from jinja2 import TemplateNotFound
-
 from app.db import db
 from app.db.models import Song
 from app.songs.forms import csv_upload
@@ -22,7 +20,7 @@ def songs_browse(page):
     pagination = Song.query.paginate(page, per_page, error_out=False)
     data = pagination.items
     try:
-        return render_template('browse_songs.html',data=data,pagination=pagination)
+        return render_template('browse_songs.html',data=data, pagination=pagination)
     except TemplateNotFound:
         abort(404)
 

@@ -9,6 +9,7 @@ from flask_cors import CORS
 from flask_mail import Mail
 from flask_wtf.csrf import CSRFProtect
 
+from app.transactions import transactions
 from app.auth import auth
 from app.cli import create_database
 from app.context_processors import utility_text_processors
@@ -20,7 +21,7 @@ from app.logging_config import log_con, LOGGING_CONFIG
 from app.map import map
 from app.simple_pages import simple_pages
 from app.songs import songs
-from app.transactions import transactions
+
 
 mail = Mail()
 
