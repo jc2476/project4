@@ -94,7 +94,7 @@ def dashboard(page):
 
     #pagination = User.query.join(location_user).filter(location_user.user_id == current_user.id).paginate()
 
-    data = current_user.locations
+    data = current_user.transactions
 
     try:
         return render_template('dashboard.html',data=data)
