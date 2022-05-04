@@ -1,3 +1,4 @@
+import os
 from os import getenv
 import datetime
 
@@ -6,7 +7,7 @@ from flask_login import current_user
 from sqlalchemy.sql import func
 from app import transactions
 from app.auth.forms import login_form
-
+from app.db.models import Transaction
 
 
 def utility_text_processors():
@@ -26,16 +27,20 @@ def utility_text_processors():
         return f"{currency}{amount:.2f}"
 
     def bank_balance():
-        engine = sqlalchemy.create_engine("sqlite:////home/myuser/database/db2.sqlite")
-        data = sqlalchemy.MetaData(bind=engine)
-        sqlalchemy.MetaData.reflect(data)
-        #user = current_user
-        total = data.tables['transactions']
-        query = sqlalchemy.select(sqlalchemy.func.sum(total.c.amount))
-        result = engine.execute(query).fetchall()
-        currency = str(result[0])
-        balance = currency[1:-2]
-        return "${:,.2f}".format(float(balance))
+        try:
+             engine = sqlalchemy.create_engine("sqlite:////home/myuser/database/db2.sqlite")
+             data = sqlalchemy.MetaData(bind=engine)
+             sqlalchemy.MetaData.reflect(data)
+             total = data.tables['transactions']
+             query = sqlalchemy.select(sqlalchemy.func.sum(total.c.amount))
+             result = engine.execute(query).fetchall()
+             currency = str(result[0])
+             balance = currency[1:-2]
+             return "${:,.2f}".format(float(balance))
+        except:
+            return ("$0.00")
+
+
 
     return dict(
         form=form,
@@ -44,5 +49,4 @@ def utility_text_processors():
         year=current_year(),
         format_price=format_price,
         bank_balance=bank_balance()
-
     )
