@@ -35,5 +35,5 @@ def test_adding_user(application):
         assert trans2.type == "CREDIT"
         #checking cascade delete
         db.session.delete(user)
-    #    assert db.session.query(User).count() == 0
-    #    assert db.session.query(Transaction).count() == 0
+        assert db.session.query(User).count() == 0
+        assert db.session.query(Transaction).count() == 0
