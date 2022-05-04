@@ -7,4 +7,3 @@
 
 * [Developmental Deployment](https://project-4-dev.herokuapp.com/)
 
-*
