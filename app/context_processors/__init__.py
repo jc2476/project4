@@ -3,11 +3,14 @@ from os import getenv
 import datetime
 
 import sqlalchemy
+from flask import request
 from flask_login import current_user
-from sqlalchemy.sql import func
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql import func, functions
 from app import transactions
-from app.auth.forms import login_form
 from app.db.models import Transaction
+from app.auth.forms import login_form
+from app.db.models import Transaction, User
 
 
 def utility_text_processors():
@@ -28,19 +31,32 @@ def utility_text_processors():
 
     def bank_balance():
         try:
-             engine = sqlalchemy.create_engine("sqlite:////home/myuser/database/db2.sqlite")
-             data = sqlalchemy.MetaData(bind=engine)
-             sqlalchemy.MetaData.reflect(data)
-             total = data.tables['transactions']
-             query = sqlalchemy.select(sqlalchemy.func.sum(total.c.amount))
-             result = engine.execute(query).fetchall()
-             currency = str(result[0])
-             balance = currency[1:-2]
-             return "${:,.2f}".format(float(balance))
+            engine = sqlalchemy.create_engine("sqlite:////home/myuser/database/db2.sqlite")
+            data = sqlalchemy.MetaData(bind=engine)
+            sqlalchemy.MetaData.reflect(data)
+            total = data.tables['transactions']
+            query = sqlalchemy.select([sqlalchemy.func.round(sqlalchemy.func.sum(total.c.amount), 1)])
+            query = query.where(total.c.user_id == current_user.id)
+            result = engine.execute(query).fetchall()
+            currency = str(result[0])
+            balance = currency[1:-2]
+            return "${:,.2f}".format(float(balance))
         except:
             return ("$0.00")
 
-
+    def total_balance():
+        try:
+            engine = sqlalchemy.create_engine("sqlite:////home/myuser/database/db2.sqlite")
+            data = sqlalchemy.MetaData(bind=engine)
+            sqlalchemy.MetaData.reflect(data)
+            total = data.tables['transactions']
+            query = sqlalchemy.select([sqlalchemy.func.round(sqlalchemy.func.sum(total.c.amount), 1)])
+            result = engine.execute(query).fetchall()
+            currency = str(result[0])
+            balance = currency[1:-2]
+            return "${:,.2f}".format(float(balance))
+        except:
+            return ("$0.00")
 
     return dict(
         form=form,
@@ -48,5 +64,6 @@ def utility_text_processors():
         deployment_environment=deployment_environment(),
         year=current_year(),
         format_price=format_price,
-        bank_balance=bank_balance()
-    )
+        bank_balance=bank_balance(),
+        total_balance=total_balance()
+           )

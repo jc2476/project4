@@ -28,16 +28,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <div class="navbar-nav mr-auto">
+                     {{ render_nav_item('simple_pages.welcome','Welcome') }}
+                    {{ render_nav_item('simple_pages.about','About') }}
+
                         {% if current_user.is_authenticated %}
                             {{ render_nav_item('auth.dashboard','Dashboard' ) }}
-                            {{ render_nav_item('transactions.transactions_browse','Transactions' ) }}
-                            {{ render_nav_item('songs.songs_browse','Songs' ) }}
-                            {{ render_nav_item('map.browse_locations','Locations' ) }}
+{#                            {{ render_nav_item('transactions.transactions_browse','Transactions' ) }}#}
+{#                            {{ render_nav_item('songs.songs_browse','Songs' ) }}#}
+{#                            {{ render_nav_item('map.browse_locations','Locations' ) }}#}
                         {% else %}
                             {{ render_nav_item('simple_pages.index', 'Home') }}
                         {% endif %}
-                        {{ render_nav_item('simple_pages.about','About') }}
-                        {{ render_nav_item('simple_pages.welcome','Welcome') }}
+
                     </div>
                 </div>
                 <div class="navbar-nav d-flex">
