@@ -1,0 +1,9 @@
+[2022-05-05 16:45:16,859] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:register() LINE:33] New user test@test.com registered from 172.22.0.1
+[2022-05-05 20:35:42,048] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:register() LINE:35] New user test2@test.com registered from 172.22.0.1
+[2022-05-05 20:35:57,641] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test2@test.com User Login from 172.22.0.1
+[2022-05-05 20:46:08,391] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test@test.com User Login from 172.22.0.1
+[2022-05-05 21:03:51,096] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test2@test.com User Login from 172.22.0.1
+[2022-05-05 21:04:43,938] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:register() LINE:35] New user test3@test.com registered from 172.22.0.1
+[2022-05-05 21:04:57,753] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test3@test.com User Login from 172.22.0.1
+[2022-05-05 21:05:40,164] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test@test.com User Login from 172.22.0.1
+[2022-05-05 21:08:27,330] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:register() LINE:35] New user test@test.test registered from 127.0.0.1

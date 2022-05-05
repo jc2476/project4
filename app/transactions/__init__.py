@@ -50,13 +50,3 @@ def transactions_upload():
         return render_template('upload_transactions.html', form=form)
     except TemplateNotFound:
         abort(404)
-
-# @transactions.route('/dashboard', methods=['POST', 'GET'])
-# @login_required
-# def total_balance():
-#     qry = session.query(func.sum(Transaction.amount).label("Balance"))
-#     qry = qry.group_by(Transaction.amount)
-#     for result in qry.all():
-#         return result
-#    # return render_template('dashboard.html', main=main)
-#
