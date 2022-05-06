@@ -7,3 +7,6 @@
 [2022-05-05 21:04:57,753] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test3@test.com User Login from 172.22.0.1
 [2022-05-05 21:05:40,164] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test@test.com User Login from 172.22.0.1
 [2022-05-05 21:08:27,330] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:register() LINE:35] New user test@test.test registered from 127.0.0.1
+[2022-05-06 12:47:48,684] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:register() LINE:35] New user test@test.test registered from 127.0.0.1
+[2022-05-06 12:50:53,174] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:login() LINE:60] test@test.com User Login from 172.22.0.1
+[2022-05-06 12:51:22,820] INFO METHOD: POST FILENAME:__init__.py FUNCTION NAME:edit_profile() LINE:102] test@test.com Profile updated from 172.22.0.1
