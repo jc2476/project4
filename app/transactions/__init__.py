@@ -9,7 +9,6 @@ from app.db.models import Transaction
 from app.logging_config import CSV_file_upload
 from app.transactions.forms import csv_upload
 from werkzeug.utils import secure_filename, redirect
-from sqlalchemy.sql import func
 
 transactions = Blueprint('transactions', __name__,
                         template_folder='templates')
