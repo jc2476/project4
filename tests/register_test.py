@@ -4,7 +4,7 @@ from app import User, db
 
 def test_register(client):
     """ POST to /register """
-    new_email = 'test@test.test'
+    new_email = 'joe@joe.com'
     new_password = 'test123'
     data = {
         'email' : new_email,

@@ -15,7 +15,6 @@ from werkzeug.utils import secure_filename, redirect
 auth = Blueprint('auth', __name__, template_folder='templates')
 
 
-
 @auth.route('/register', methods=['POST', 'GET'])
 def register():
     if current_user.is_authenticated:
@@ -33,7 +32,7 @@ def register():
                 db.session.commit()
             flash('Congratulations, you are now a registered user!', "success")
             current_app.logger.info("New user " + user.email + " registered")
-            return redirect(url_for('auth.dashboard'), 302)
+            return redirect(url_for('auth.login'), 302)
         else:
             flash('Already Registered')
             current_app.logger.error(user.email + " Already registered")
@@ -119,9 +118,6 @@ def edit_account():
     return render_template('manage_account.html', form=form)
 
 
-
-#You should probably move these to a new Blueprint to clean this up.  These functions below are for user management
-
 @auth.route('/users')
 @login_required
 @admin_required
@@ -158,20 +154,6 @@ def edit_user(user_id):
         current_app.logger.info(user.email + " Edited a user")
         return redirect(url_for('auth.browse_users'))
     return render_template('user_edit.html', form=form)
-
-
-# @auth.route('/dashboard', methods=['GET'], defaults={"page": 1})
-# @auth.route('/dashboard/<int:page>', methods=['GET'])
-# @login_required
-# def transactions(page):
-#     page = page
-#     per_page = 1000
-#     pagination = Transaction.query.filter_by(user_id=current_user.id).paginate(page, per_page, error_out=False)
-#     data = pagination.items
-#     try:
-#         return render_template('dashboard.html',data=data, pagination=pagination)
-#     except TemplateNotFound:
-#         abort(404)
 
 
 @auth.route('/users/new', methods=['POST', 'GET'])

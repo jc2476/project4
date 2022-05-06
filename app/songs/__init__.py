@@ -6,6 +6,7 @@ from flask_login import current_user, login_required
 from jinja2 import TemplateNotFound
 from app.db import db
 from app.db.models import Song
+from app.logging_config import CSV_file_upload
 from app.songs.forms import csv_upload
 from werkzeug.utils import secure_filename, redirect
 
@@ -39,11 +40,11 @@ def songs_upload():
         with open(filepath) as file:
             csv_file = csv.DictReader(file)
             for row in csv_file:
-                list_of_songs.append(Song(row['Name'],row['Artist'],row['Genre']))
+                list_of_songs.append(Song(row['Name'],row['Artist'],row['Genre'],row['Year'] ))
 
         current_user.songs = list_of_songs
         db.session.commit()
-
+        CSV_file_upload()
         return redirect(url_for('songs.songs_browse'))
 
     try:

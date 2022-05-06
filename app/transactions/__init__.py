@@ -6,9 +6,9 @@ from flask_login import current_user, login_required
 from jinja2 import TemplateNotFound
 from app.db import db
 from app.db.models import Transaction
+from app.logging_config import CSV_file_upload
 from app.transactions.forms import csv_upload
 from werkzeug.utils import secure_filename, redirect
-from sqlalchemy.sql import func
 
 transactions = Blueprint('transactions', __name__,
                         template_folder='templates')
@@ -40,12 +40,10 @@ def transactions_upload():
             csv_file = csv.DictReader(file)
             for row in csv_file:
                 list_of_transactions.append(Transaction(row['Amount'],row['Type']))
-
-        current_user.transactions = list_of_transactions
+        current_user.transactions += list_of_transactions
         db.session.commit()
-
+        CSV_file_upload()
         return redirect(url_for('transactions.transactions_browse'))
-
     try:
         return render_template('upload_transactions.html', form=form)
     except TemplateNotFound:

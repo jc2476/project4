@@ -44,6 +44,7 @@ def utility_text_processors():
         except:
             return ("$0.00")
 
+
     def total_balance():
         try:
             engine = sqlalchemy.create_engine("sqlite:////home/myuser/database/db2.sqlite")
