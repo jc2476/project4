@@ -40,12 +40,9 @@ def transactions_upload():
             csv_file = csv.DictReader(file)
             for row in csv_file:
                 list_of_transactions.append(Transaction(row['Amount'],row['Type']))
-
-        current_user.transactions = list_of_transactions
+        current_user.transactions += list_of_transactions
         db.session.commit()
-
         return redirect(url_for('transactions.transactions_browse'))
-
     try:
         return render_template('upload_transactions.html', form=form)
     except TemplateNotFound:
