@@ -25,3 +25,4 @@
 2022-05-06 17:46:42,862 [INFO] werkzeug:  * Detected change in '/home/myuser/app/transactions/__init__.py', reloading
 2022-05-06 17:54:11,374 [INFO] werkzeug: 172.22.0.1 - - [06/May/2022 17:54:11] "GET /about HTTP/1.1" 200 -
 2022-05-06 17:54:12,575 [INFO] werkzeug: 172.22.0.1 - - [06/May/2022 17:54:12] "GET /welcome HTTP/1.1" 200 -
+2022-05-06 20:03:20,296 [INFO] werkzeug:  * Detected change in '/home/myuser/tests/upload_test.py', reloading
